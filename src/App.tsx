@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Formik, Form } from 'formik'
 
 const Container = styled.div`
   display: flex;
@@ -14,11 +15,17 @@ const Section = styled.section`
   width: 500px;
   box-shadow: 0px 2px 3px rgb(0,0,0,0.3);
 `
-
 function App () {
+  const handleSubmit = () => {}
   return (
     <Container>
       <Section>
+        <Formik
+          initialValues={{
+          }
+        }
+        onSubmit={handleSubmit}>
+        </Formik>
       </Section>
     </Container>
   )
