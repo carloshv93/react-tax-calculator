@@ -5,6 +5,7 @@ import Container from './components/Container'
 import Section from './components/Section'
 import Balance from './components/Balance'
 import { useState } from 'react'
+import * as Yup from 'yup'
 
 const compoundInterest = (deposit:number, contribution:number, years:number, rate:number) => {
   let total:number = deposit
@@ -38,7 +39,28 @@ function App () {
             rate: ''
           }
         }
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+        validationSchema={Yup.object({
+          deposit: Yup
+            .number()
+            .required('Required')
+            .typeError('Must be a number'),
+          contribution: Yup
+            .number()
+            .required('Required')
+            .typeError('Must be a number'),
+          years: Yup
+            .number()
+            .required('Required')
+            .typeError('Must be a number')
+            .min(1, 'You should save your money for one year'),
+          rate: Yup
+            .number()
+            .required('Required')
+            .typeError('Must be a number')
+            .min(0, 'Min value is 0')
+            .max(1, 'Max value is 1')
+        })}>
           <Form>
             <Input name="deposit" label="Initial deposit"/>
             <Input name="contribution" label="Contribution"/>
